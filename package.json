@@ -1,0 +1,9 @@
+{
+  "name": "luipack",
+  "version": "0.1.0",
+  "description": "Arbitrary collection of components, templates and utils",
+  "main": "index.js",
+  "repository": "https://github.com/blikblum/luipack-js.git",
+  "author": "Luiz Américo <luizamericop@gmail.com>",
+  "license": "MIT"
+}
