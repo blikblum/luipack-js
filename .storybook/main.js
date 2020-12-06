@@ -19,7 +19,6 @@ const sassRule = {
 }
 
 module.exports = {
-  stories: ['../stories/**/*.stories.js'],
   addons: ['@storybook/addon-essentials'],
   webpackFinal: async function (config) {
     if (config.name !== 'manager') {
