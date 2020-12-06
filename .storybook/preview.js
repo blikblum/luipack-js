@@ -1,7 +1,6 @@
 /* global window */
 
 import {
-  configure,
   addParameters,
   // setCustomElements,
 } from '@storybook/web-components'
@@ -23,7 +22,6 @@ addParameters({
 
 // force full reload to not reregister web components
 const req = require.context('../stories', true, /\.stories\.(js|mdx)$/)
-configure(req, module)
 if (module.hot) {
   module.hot.accept(req.id, () => {
     const currentLocationHref = window.location.href
