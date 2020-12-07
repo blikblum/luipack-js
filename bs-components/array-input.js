@@ -40,7 +40,8 @@ export default class ArrayInput extends Component {
     this.triggerChange()
   }
 
-  inputBlur(e) {
+  inputChange(e) {
+    e.stopPropagation()
     const input = e.target
     const row = input.closest('[data-index]')
 
@@ -53,14 +54,9 @@ export default class ArrayInput extends Component {
     this.removeItem(+row.dataset.index)
   }
 
-  newInputBlur(e) {
+  newInputChange(e) {
+    e.stopPropagation()
     this.addItem(e.target)
-  }
-
-  newInputKeydown(e) {
-    if (e.which === 13 || e.which === 9) {
-      this.addItem(e.target)
-    }
   }
 
   render() {
@@ -76,8 +72,7 @@ export default class ArrayInput extends Component {
                   class="form-control"
                   type="text"
                   .value=${text || null}
-                  @blur=${this.inputBlur}
-                  @change=${stopEvent}
+                  @change=${this.inputChange}
                   @input=${stopEvent}
                 />
               </div>
@@ -92,9 +87,7 @@ export default class ArrayInput extends Component {
           type="text"
           class="form-control flex-grow-1 mx-1"
           placeholder="Add another"
-          @blur=${this.newInputBlur}
-          @keydown=${this.newInputKeydown}
-          @change=${stopEvent}
+          @change=${this.newInputChange}
           @input=${stopEvent}
         />
         <button type="button" class="close pb-2 invisible">
