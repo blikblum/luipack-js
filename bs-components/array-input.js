@@ -13,6 +13,9 @@ export default class ArrayInput extends Component {
   @property({ type: String })
   name
 
+  @property({ type: String })
+  placeholder = 'Add another'
+
   triggerChange() {
     this.dispatchEvent(new CustomEvent('change', { bubbles: true }))
   }
@@ -86,7 +89,7 @@ export default class ArrayInput extends Component {
         <input
           type="text"
           class="form-control flex-grow-1 mx-1"
-          placeholder="Add another"
+          placeholder=${this.placeholder}
           @change=${this.newInputChange}
           @input=${stopEvent}
         />
