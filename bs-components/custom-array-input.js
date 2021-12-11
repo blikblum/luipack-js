@@ -159,4 +159,4 @@ class CustomArrayInput extends Component {
 
 customElements.define('custom-array-input', CustomArrayInput)
 
-export { CustomArrayInput as ArrayInput }
+export { CustomArrayInput }
