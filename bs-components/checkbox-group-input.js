@@ -3,6 +3,8 @@ import { Component, html, property } from '../light-component.js'
 
 import './checkbox-group-input.scss'
 
+let checkboxGroupCount = 0
+
 export default class CheckboxGroupInput extends Component {
   @property({ attribute: false })
   value
@@ -12,6 +14,8 @@ export default class CheckboxGroupInput extends Component {
 
   @property({ type: Array, attribute: false })
   items
+
+  _idPrefix = `checkboxgroup${checkboxGroupCount++}-`
 
   updateValue(itemValue, checked) {
     // todo: only trigger change / update value if state changed
@@ -36,6 +40,7 @@ export default class CheckboxGroupInput extends Component {
     }
     this.value = value
     this.dispatchEvent(new InputEvent('change', { bubbles: true }))
+    this.dispatchEvent(new InputEvent('input', { bubbles: true }))
     this.requestUpdate()
   }
 
@@ -56,7 +61,8 @@ export default class CheckboxGroupInput extends Component {
   }
 
   valueContainsItemValue(itemValue) {
-    return Array.isArray(this.value) ? this.value.includes(itemValue) : itemValue in this.value
+    const { value = [] } = this
+    return Array.isArray(value) ? value.includes(itemValue) : itemValue in value
   }
 
   render() {
@@ -64,7 +70,7 @@ export default class CheckboxGroupInput extends Component {
 
     return html`
       ${items.map((item, i) => {
-        const id = `${this.name}-${i}`
+        const id = `${this._idPrefix}${i}`
         return html`
           <div class="custom-control custom-checkbox">
             <input
