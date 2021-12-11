@@ -1,12 +1,10 @@
-import { Component, html, property } from '../light-component'
-
-import './array-input.scss'
+import { Component, html, property } from '../light-component.js'
 
 const stopEvent = (e) => {
   e.stopPropagation()
 }
 
-export default class ArrayInput extends Component {
+export class StringArrayInput extends Component {
   @property({ type: Array, attribute: false })
   value
 
@@ -94,12 +92,11 @@ export default class ArrayInput extends Component {
           @input=${stopEvent}
         />
         <button type="button" class="close pb-2 invisible">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" style="vertical-align: super;">&times;</span>
         </button>
       </div>
     `
   }
 }
 
-customElements.define('array-input', ArrayInput)
-customElements.define('string-array-input', ArrayInput)
+customElements.define('string-array-input', StringArrayInput)
