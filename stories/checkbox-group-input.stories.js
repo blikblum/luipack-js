@@ -20,18 +20,44 @@ const items = [
   { name: 'Solicitação de exames', value: 3 },
 ]
 
-export const ArrayValue = () =>
-  html`<checkbox-group-input name="test" .value=${[2]} .items=${items}></checkbox-group-input>`
+const Template = ({ value }) =>
+  html`<checkbox-group-input name="test" .value=${value} .items=${items}></checkbox-group-input>`
 
-export const ArrayValueEmpty = () =>
-  html`<checkbox-group-input name="test" .value=${[]} .items=${items}></checkbox-group-input>`
+export const ArrayValue = Template.bind({})
+ArrayValue.args = {
+  value: [2],
+}
 
-export const ObjectValue = () =>
-  html`<checkbox-group-input
-    name="test"
-    .value=${{ 2: true }}
-    .items=${items}
-  ></checkbox-group-input>`
+export const ArrayValueEmpty = Template.bind({})
+ArrayValueEmpty.args = {
+  value: [2],
+}
 
-export const ObjectValueEmpty = () =>
-  html`<checkbox-group-input name="test" .value=${{}} .items=${items}></checkbox-group-input>`
+export const ObjectValue = Template.bind({})
+ObjectValue.args = {
+  value: { 2: true },
+}
+
+export const ObjectValueEmpty = Template.bind({})
+ObjectValueEmpty.args = {
+  value: {},
+}
+
+const FormGroupTemplate = ({ value, invalidFeedback }) =>
+  html`
+    <div class="form-group">
+      <label>Pendências</label>
+      <checkbox-group-input
+        name="test"
+        class="${invalidFeedback ? 'is-invalid' : ''}"
+        .value=${value}
+        .items=${items}
+      ></checkbox-group-input>
+      ${invalidFeedback ? html`<div class="invalid-feedback">${invalidFeedback}</div>` : ''}
+    </div>
+  `
+export const FormGroup = FormGroupTemplate.bind({})
+FormGroup.args = {}
+
+export const FormGroupInvalid = FormGroupTemplate.bind({})
+FormGroupInvalid.args = { invalidFeedback: 'There an error' }
