@@ -5,8 +5,11 @@ class DataTable extends Component {
   @property({ attribute: false })
   fields = []
 
-  @property()
+  @property({ attribute: false })
   selected
+
+  @property({ attribute: false })
+  editing
 
   @property({ attribute: 'empty-message' })
   emptyMessage
@@ -52,6 +55,13 @@ class DataTable extends Component {
     )
   }
 
+  @event('click', '[data-toggle="editor"]')
+  onToggleEditorClick(e) {
+    const rowEl = e.selectorTarget.closest('.item-row')
+    const rowModel = rowEl ? rowEl.model : undefined
+    this.editing = rowModel
+  }
+
   showLoading() {
     if (this.collection.isLoading) {
       if (this._showLoading === undefined) {
@@ -81,17 +91,22 @@ class DataTable extends Component {
         </td>
       </tr>`
     }
+
     if (!this.collection.length) {
       return html`<tr>
         <td colspan=${this.fields.length}>
-          <div class="d-flex justify-content-center">
-            ${this.emptyMessage}
-          </div>
+          <div class="d-flex justify-content-center">${this.emptyMessage}</div>
         </td>
       </tr>`
     }
 
     return this.collection.map((model) => {
+      if (model === this.editing && this.renderEditor) {
+        return html`<tr>
+          <td colspan=${this.fields.length}>${this.renderEditor(model)}</td>
+        </tr>`
+      }
+
       return html`
         <tr
           class="item-row ${classMap({
@@ -100,11 +115,7 @@ class DataTable extends Component {
           .model=${model}
         >
           ${this.fields.map((field) => {
-            return html`
-              <td>
-                ${field.render ? field.render(model) : model.get(field.attr)}
-              </td>
-            `
+            return html` <td>${field.render ? field.render(model) : model.get(field.attr)}</td> `
           })}
         </tr>
       `
