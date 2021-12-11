@@ -102,3 +102,4 @@ export default class ArrayInput extends Component {
 }
 
 customElements.define('array-input', ArrayInput)
+customElements.define('string-array-input', ArrayInput)
