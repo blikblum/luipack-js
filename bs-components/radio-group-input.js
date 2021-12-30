@@ -1,5 +1,4 @@
-import { LitElement, html, css, property } from 'lit-element'
-import { Component } from '../component'
+import { Component, html, property } from '../light-component.js'
 
 export default class RadioGroupInput extends Component {
   @property({ attribute: false })

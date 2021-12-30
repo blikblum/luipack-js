@@ -1,4 +1,4 @@
-import { render } from 'lit-html'
+import { render } from 'lit'
 
 const components = new WeakSet()
 

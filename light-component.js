@@ -1,7 +1,8 @@
-import { LitElement, html, customElement, property } from 'lit-element'
-import { classMap } from 'lit-html/directives/class-map'
-import { styleMap } from 'lit-html/directives/style-map'
-import { ifDefined } from 'lit-html/directives/if-defined'
+import { LitElement, html } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { styleMap } from 'lit/directives/style-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 
 class Component extends LitElement {
   createRenderRoot() {

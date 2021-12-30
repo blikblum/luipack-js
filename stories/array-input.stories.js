@@ -1,11 +1,11 @@
-import { html } from 'lit-html'
+import { html } from 'lit'
 import 'jquery'
 import 'bootstrap'
 
-import '../bs-components/array-input'
+import '../bs-components/string-array-input.js'
 
 export default {
-  title: 'Components/ArrayInput',
+  title: 'Components/StringArrayInput',
   parameters: {
     layout: 'centered',
     actions: {
@@ -18,7 +18,11 @@ export default {
 }
 
 const Template = ({ value, placeholder }) =>
-  html`<array-input name="test" placeholder=${placeholder} .value=${value}></array-input>`
+  html`<string-array-input
+    name="test"
+    placeholder=${placeholder}
+    .value=${value}
+  ></string-array-input>`
 
 export const Default = Template.bind({})
 Default.args = {
