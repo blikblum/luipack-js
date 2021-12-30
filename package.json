@@ -1,6 +1,6 @@
 {
   "name": "luipack",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Arbitrary collection of components, templates and utils",
   "main": "index.js",
   "repository": "https://github.com/blikblum/luipack-js.git",
@@ -10,6 +10,10 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "files": [
+    "bs-components",
+    "light-component.js"
+  ],
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
