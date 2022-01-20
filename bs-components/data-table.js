@@ -172,8 +172,8 @@ class DataTable extends Component {
     }
 
     const theadClasses = {
-      'thead-dark': this.theadDark,
-      'thead-light': this.theadLight,
+      'thead-dark table-dark': this.theadDark,
+      'thead-light table-light': this.theadLight,
     }
 
     return html`
