@@ -1,5 +1,15 @@
 import { Component, classMap, styleMap, property, html } from '../light-component.js'
 import { state, event } from 'nextbone'
+import { isEqual, isPlainObject } from 'lodash-es'
+
+class DataTableActionEvent extends Event {
+  model
+
+  constructor(eventName, model) {
+    super(eventName, { bubbles: true })
+    this.model = model
+  }
+}
 
 class DataTable extends Component {
   @property({ attribute: false })
@@ -16,6 +26,16 @@ class DataTable extends Component {
 
   @state
   collection
+
+  _params = {}
+
+  set params(value) {
+    // todo use a proxy here
+    if (isPlainObject(value) && !isEqual(value, this._params)) {
+      this._params = { ...value }
+      this.requestUpdate()
+    }
+  }
 
   // css options
   @property({ type: Boolean })
@@ -45,6 +65,8 @@ class DataTable extends Component {
   @property({ type: Boolean, attribute: 'thead-light' })
   theadLight
 
+  renderEditor
+
   @event('click', 'tr.item-row')
   onRowClick(e) {
     this.dispatchEvent(
@@ -60,6 +82,18 @@ class DataTable extends Component {
     const rowEl = e.selectorTarget.closest('.item-row')
     const rowModel = rowEl ? rowEl.model : undefined
     this.editing = rowModel
+  }
+
+  @event('click', 'tr.item-row [data-action]')
+  onActionClick(e) {
+    const actionEl = e.selectorTarget
+    const rowEl = actionEl.closest('.item-row')
+    const rowModel = rowEl ? rowEl.model : undefined
+
+    const { action } = actionEl.dataset
+    if (action) {
+      this.dispatchEvent(new DataTableActionEvent(action, rowModel))
+    }
   }
 
   showLoading() {
@@ -115,7 +149,9 @@ class DataTable extends Component {
           .model=${model}
         >
           ${this.fields.map((field) => {
-            return html` <td>${field.render ? field.render(model) : model.get(field.attr)}</td> `
+            return html`
+              <td>${field.render ? field.render(model, this._params) : model.get(field.attr)}</td>
+            `
           })}
         </tr>
       `

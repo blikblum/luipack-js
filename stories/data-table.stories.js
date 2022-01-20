@@ -64,13 +64,6 @@ const defaultFields = [
     render: renderTags,
     styles: { width: '200px' },
   },
-  {
-    render: () =>
-      html`
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="editor">Editar</button
-        ><button type="button" class="btn btn-danger btn-sm">Excluir</button>
-      `,
-  },
 ]
 
 export default {
@@ -78,7 +71,7 @@ export default {
   parameters: {
     layout: 'centered',
     actions: {
-      handles: [],
+      handles: ['my-action'],
     },
   },
   args: {
@@ -87,18 +80,56 @@ export default {
   },
 }
 
-const Template = ({ fields, collection, renderEditor }) =>
+const Template = ({ fields, collection, params, renderEditor }) =>
   html`<data-table
     .fields=${fields}
     .collection=${collection}
     .renderEditor=${renderEditor}
+    .params=${params}
   ></data-table>`
 
 export const Default = Template.bind({})
 Default.args = {}
 
+export const Action = Template.bind({})
+Action.args = {
+  fields: [
+    ...defaultFields,
+    {
+      render: () =>
+        html`
+          <button type="button" class="btn btn-primary btn-sm" data-action="my-action">
+            Action
+          </button>
+        `,
+    },
+  ],
+}
+
+export const Params = Template.bind({})
+Params.args = {
+  params: { user: 'Luiz' },
+  fields: [
+    ...defaultFields,
+    {
+      title: 'User',
+      render: (m, { user }) => user,
+    },
+  ],
+}
+
 export const Editor = Template.bind({})
 Editor.args = {
+  fields: [
+    ...defaultFields,
+    {
+      render: () =>
+        html`
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="editor">Editar</button
+          ><button type="button" class="btn btn-danger btn-sm">Excluir</button>
+        `,
+    },
+  ],
   renderEditor(model) {
     return html`<div class="card">
       <div class="card-body">
