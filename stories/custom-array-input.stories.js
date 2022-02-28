@@ -15,33 +15,61 @@ export default {
   },
   args: {
     value: [{ name: 'Hello', value: 'World' }],
-    itemRender(item) {
+    itemRender(item, { index }) {
       return html`<div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label>Name</label>
-            <input
-              name="name"
-              class="form-control"
-              type="text"
-              placeholder="Name"
-              .value=${item.name || null}
-            />
+          <div class="col">
+            <div class="form-group">
+              <label>Name</label>
+              <input
+                name="name"
+                class="form-control"
+                type="text"
+                placeholder="Name"
+                .value=${item.name || null}
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Value</label>
+              <input
+                name="value"
+                class="form-control"
+                type="text"
+                placeholder="Value"
+                .value=${item.value || null}
+              />
+            </div>
           </div>
         </div>
-        <div class="col">
-          <div class="form-group">
-            <label>Value</label>
-            <input
-              name="value"
-              class="form-control"
-              type="text"
-              placeholder="Value"
-              .value=${item.value || null}
-            />
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Number Value</label>
+              <input
+                name="numberValue"
+                class="form-control"
+                type="number"
+                placeholder="Number Value"
+                .value=${item.numberValue || null}
+              />
+            </div>
           </div>
-        </div>
-      </div>`
+          <div class="col align-items-center d-flex">
+            <div class="custom-control custom-checkbox">
+              <input
+                id=${`checkbox-value-${index}`}
+                name="checkboxValue"
+                class="custom-control-input"
+                type="checkbox"
+                .checked=${Boolean(item.checkboxValue)}
+              />
+              <label for=${`checkbox-value-${index}`} class="custom-control-label"
+                >Checkbox Value</label
+              >
+            </div>
+          </div>
+        </div> `
     },
   },
 }
