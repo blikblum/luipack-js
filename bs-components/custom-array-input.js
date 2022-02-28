@@ -52,6 +52,10 @@ class CustomArrayInput extends Component {
         value = input.valueAsNumber
         break
 
+      case 'checkbox':
+        value = Boolean(input.checked)
+        break
+
       default:
         // todo: handle date
         value = input.value
@@ -111,9 +115,9 @@ class CustomArrayInput extends Component {
     if (!value.length) {
       return html`<div style="font-style: italic;">${this.emptyMessage || 'No items'}</div>`
     }
-    return value.map((item) => {
+    return value.map((item, index) => {
       return html`<div class="array-input-item form-row mb-1" .item=${item}>
-        <div class="col">${this.itemRender(item)}</div>
+        <div class="col">${this.itemRender(item, { index })}</div>
 
         <div class="col-auto d-flex align-items-center">
           <button type="button" class="close" aria-label="Remove" @click=${this.removeButtonClick}>
