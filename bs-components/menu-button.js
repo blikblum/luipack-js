@@ -1,5 +1,5 @@
 import { event, view, state } from 'nextbone'
-import { Component, html, property , classMap } from '../light-component.js'
+import { Component, html, property, classMap } from '../light-component.js'
 
 import './menu-button.scss'
 
@@ -79,13 +79,14 @@ class MenuButton extends Component {
           type="button"
           class="btn dropdown-toggle ${classMap(buttonClasses)}"
           data-toggle="dropdown"
+          data-bs-toggle="dropdown"
         >
           <span class=${this.iconClass}></span>
           ${buttonCaption}
         </button>
         <div class="dropdown-menu">
           ${items.map((item) => {
-            if (item.type === 'separator') {
+            if (item.type === 'divider') {
               return html` <div class="dropdown-divider"></div> `
             }
             return html` <a class="dropdown-item" .item=${item}>${item.name}</a> `
