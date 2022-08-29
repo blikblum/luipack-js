@@ -78,7 +78,6 @@ class MenuButton extends Component {
         <button
           type="button"
           class="btn dropdown-toggle ${classMap(buttonClasses)}"
-          data-toggle="dropdown"
           data-bs-toggle="dropdown"
         >
           <span class=${this.iconClass}></span>

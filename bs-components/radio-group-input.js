@@ -89,7 +89,7 @@ export default class RadioGroupInput extends Component {
               />
               <label class="custom-control-label" for="other-radio-input">Outro</label>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
               <input
                 id="other-input"
                 type="text"

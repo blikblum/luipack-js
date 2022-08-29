@@ -77,23 +77,26 @@ export class StringArrayInput extends Component {
                   @input=${stopEvent}
                 />
               </div>
-              <button type="button" class="close" aria-label="Delete" @click=${this.deleteClick}>
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <button
+                type="button"
+                class="btn-close"
+                aria-label="Remove"
+                @click=${this.deleteClick}
+              ></button>
             </div>
           `
       )}
-      <div class="d-flex">
-        <input
-          type="text"
-          class="form-control flex-grow-1 mx-1"
-          placeholder=${this.placeholder}
-          @change=${this.newInputChange}
-          @input=${stopEvent}
-        />
-        <button type="button" class="close pb-2 invisible">
-          <span aria-hidden="true" style="vertical-align: super;">&times;</span>
-        </button>
+      <div class="d-flex align-items-center">
+        <div class="flex-grow-1 mx-1">
+          <input
+            type="text"
+            class="form-control  "
+            placeholder=${this.placeholder}
+            @change=${this.newInputChange}
+            @input=${stopEvent}
+          />
+        </div>
+        <button type="button" class="btn-close invisible" aria-hidden="true"></button>
       </div>
     `
   }

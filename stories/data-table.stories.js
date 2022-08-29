@@ -135,7 +135,7 @@ Editor.args = {
       <div class="card-body">
         <div class="row">
           <div class="col">
-            <div class="form-group">
+            <div class="mb-3">
               <label for="">Nome</label>
               <input type="text" .value=${model.get('name') || null} />
             </div>

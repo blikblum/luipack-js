@@ -18,8 +18,8 @@ export default {
     itemRender(item, { index }) {
       return html`<div class="row">
           <div class="col">
-            <div class="form-group">
-              <label>Name</label>
+            <div class="mb-3">
+              <label class="form-label">Name</label>
               <input
                 name="name"
                 class="form-control"
@@ -30,8 +30,8 @@ export default {
             </div>
           </div>
           <div class="col">
-            <div class="form-group">
-              <label>Value</label>
+            <div class="mb-3">
+              <label class="form-label">Value</label>
               <input
                 name="value"
                 class="form-control"
@@ -44,8 +44,8 @@ export default {
         </div>
         <div class="row">
           <div class="col">
-            <div class="form-group">
-              <label>Number Value</label>
+            <div class="mb-3">
+              <label class="form-label">Number Value</label>
               <input
                 name="numberValue"
                 class="form-control"
@@ -56,15 +56,15 @@ export default {
             </div>
           </div>
           <div class="col align-items-center d-flex">
-            <div class="custom-control custom-checkbox">
+            <div class="form-check">
               <input
                 id=${`checkbox-value-${index}`}
                 name="checkboxValue"
-                class="custom-control-input"
+                class="form-check-input"
                 type="checkbox"
                 .checked=${Boolean(item.checkboxValue)}
               />
-              <label for=${`checkbox-value-${index}`} class="custom-control-label"
+              <label for=${`checkbox-value-${index}`} class="form-check-label"
                 >Checkbox Value</label
               >
             </div>
@@ -120,8 +120,8 @@ Card.args = {
         <div class="card-body">
           <div class="row">
             <div class="col">
-              <div class="form-group">
-                <label>Name</label>
+              <div class="mb-3">
+                <label class="form-label">Name</label>
                 <input
                   name="name"
                   class="form-control"
@@ -132,8 +132,8 @@ Card.args = {
               </div>
             </div>
             <div class="col">
-              <div class="form-group">
-                <label>Value</label>
+              <div class="mb-3">
+                <label class="form-label">Value</label>
                 <input
                   name="value"
                   class="form-control"
@@ -165,8 +165,8 @@ CheckboxGroup.args = {
         <div class="card-body">
           <div class="row">
             <div class="col">
-              <div class="form-group">
-                <label>Name</label>
+              <div class="mb-3">
+                <label class="form-label">Name</label>
                 <input
                   name="name"
                   class="form-control"
@@ -177,8 +177,8 @@ CheckboxGroup.args = {
               </div>
             </div>
             <div class="col">
-              <div class="form-group">
-                <label>Tags</label>
+              <div class="mb-3">
+                <label class="form-label">Tags</label>
                 <checkbox-group-input
                   name="tags"
                   custom-input

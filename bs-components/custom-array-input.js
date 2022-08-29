@@ -116,13 +116,16 @@ class CustomArrayInput extends Component {
       return html`<div style="font-style: italic;">${this.emptyMessage || 'No items'}</div>`
     }
     return value.map((item, index) => {
-      return html`<div class="array-input-item form-row mb-1" .item=${item}>
+      return html`<div class="array-input-item row mb-1" .item=${item}>
         <div class="col">${this.itemRender(item, { index })}</div>
 
-        <div class="col-auto d-flex align-items-center">
-          <button type="button" class="close" aria-label="Remove" @click=${this.removeButtonClick}>
-            <span aria-hidden="true" style="vertical-align: super;">&times;</span>
-          </button>
+        <div class="col-auto d-flex align-items-center px-0">
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Remove"
+            @click=${this.removeButtonClick}
+          ></button>
         </div>
       </div>`
     })
@@ -140,7 +143,7 @@ class CustomArrayInput extends Component {
                 <button
                   class="btn btn-light btn-sm dropdown-toggle"
                   type="button"
-                  data-toggle="dropdown"
+                  data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   ${addLabel}

@@ -45,8 +45,8 @@ ObjectValueEmpty.args = {
 
 const FormGroupTemplate = ({ value, invalidFeedback }) =>
   html`
-    <div class="form-group">
-      <label>Pendências</label>
+    <div class="mb-3">
+      <label class="form-label">Pendências</label>
       <checkbox-group-input
         name="test"
         class="${invalidFeedback ? 'is-invalid' : ''}"

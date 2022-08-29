@@ -72,16 +72,16 @@ export default class CheckboxGroupInput extends Component {
       ${items.map((item, i) => {
         const id = `${this._idPrefix}${i}`
         return html`
-          <div class="custom-control custom-checkbox">
+          <div class="form-check">
             <input
               id=${id}
               type="checkbox"
               name=${this.name}
-              class="custom-control-input"
+              class="form-check-input"
               data-index=${i}
               .checked=${this.valueContainsItemValue(item.value)}
             />
-            <label class="custom-control-label" for=${id}>${item.name}</label>
+            <label class="form-check-label" for=${id}>${item.name}</label>
           </div>
         `
       })}
