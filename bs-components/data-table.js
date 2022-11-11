@@ -67,6 +67,8 @@ class DataTable extends Component {
 
   renderEditor
 
+  rowClasses
+
   @event('click', 'tr.item-row')
   onRowClick(e) {
     this.dispatchEvent(
@@ -134,18 +136,22 @@ class DataTable extends Component {
       </tr>`
     }
 
-    return this.collection.map((model) => {
+    const rowClassesFn = typeof this.rowClasses === 'function' ? this.rowClasses : () => ''
+
+    return this.collection.map((model, i) => {
       if (model === this.editing && this.renderEditor) {
         return html`<tr>
           <td colspan=${this.fields.length}>${this.renderEditor(model)}</td>
         </tr>`
       }
 
+      const rowClasses = ``
+
       return html`
         <tr
-          class="item-row ${classMap({
-            'table-active': model === this.selected,
-          })}"
+          class="item-row ${rowClassesFn(model, i)} ${model === this.selected
+            ? 'table-active'
+            : ''}"
           .model=${model}
         >
           ${this.fields.map((field) => {

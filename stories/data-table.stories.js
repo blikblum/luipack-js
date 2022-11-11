@@ -47,7 +47,7 @@ const defaultCollection = new Collection([
 
 function renderTags(model) {
   const tags = model.get('tags') || []
-  return tags.map((tag) => html`<span class="badge badge-success ml-1">${tag}</span>`)
+  return tags.map((tag) => html`<span class="badge bg-success ml-1">${tag}</span>`)
 }
 
 const defaultFields = [
@@ -80,12 +80,13 @@ export default {
   },
 }
 
-const Template = ({ fields, collection, params, renderEditor }) =>
+const Template = ({ fields, collection, params, renderEditor, rowClasses }) =>
   html`<data-table
     .fields=${fields}
     .collection=${collection}
     .renderEditor=${renderEditor}
     .params=${params}
+    .rowClasses=${rowClasses}
   ></data-table>`
 
 export const Default = Template.bind({})
@@ -151,5 +152,15 @@ Editor.args = {
         </div>
       </div>
     </div>`
+  },
+}
+
+export const RowClasses = Template.bind({})
+
+RowClasses.args = {
+  rowClasses(model, i) {
+    if (i === 2) {
+      return 'bg-danger'
+    }
   },
 }
