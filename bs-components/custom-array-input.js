@@ -1,5 +1,5 @@
 import { delegate } from 'nextbone'
-import { Component, html, property } from '../light-component.js'
+import { Component, html } from '../light-component.js'
 
 function resolveValue(value) {
   if (typeof value === 'function') return value()
@@ -7,17 +7,12 @@ function resolveValue(value) {
 }
 
 class CustomArrayInput extends Component {
-  @property({ type: String, attribute: 'add-label' })
-  addLabel
-
-  @property({ type: String, attribute: 'empty-message' })
-  emptyMessage
-
-  @property({ type: String })
-  name
-
-  @property({ type: Array, attribute: false })
-  value
+  static properties = {
+    addLabel: { type: String, attribute: 'add-label' },
+    emptyMessage: { type: String, attribute: 'empty-message' },
+    name: { type: String },
+    value: { type: Array, attribute: false },
+  }
 
   itemRender
 
@@ -28,7 +23,7 @@ class CustomArrayInput extends Component {
   constructor() {
     super()
     delegate(this, 'click', '.dropdown-item', this.addItemClick, this)
-    delegate(this, 'input', 'input, [custom-input]', this.inputInputHandler, this)
+    delegate(this, 'input', 'input, select, [custom-input]', this.inputInputHandler, this)
     delegate(this, 'change', 'input, [custom-input]', this.inputChangeHandler, this)
   }
 
