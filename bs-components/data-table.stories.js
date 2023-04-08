@@ -3,7 +3,7 @@ import { Collection } from 'nextbone'
 import 'jquery'
 import 'bootstrap'
 
-import '../bs-components/data-table.js'
+import './data-table.js'
 
 const defaultCollection = new Collection([
   {

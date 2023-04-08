@@ -2,7 +2,7 @@ import { html } from 'lit'
 import 'jquery'
 import 'bootstrap'
 
-import '../bs-components/checkbox-group-input'
+import './checkbox-group-input'
 
 export default {
   title: 'Components/CheckBoxInputGroup',

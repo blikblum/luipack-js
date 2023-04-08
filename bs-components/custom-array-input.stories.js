@@ -2,8 +2,8 @@ import { html } from 'lit'
 import 'jquery'
 import 'bootstrap'
 
-import '../bs-components/custom-array-input.js'
-import '../bs-components/checkbox-group-input.js'
+import './custom-array-input.js'
+import './checkbox-group-input.js'
 
 export default {
   title: 'Components/CustomArrayInput',

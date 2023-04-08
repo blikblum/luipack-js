@@ -2,7 +2,7 @@ import { html } from 'lit'
 import 'jquery'
 import 'bootstrap'
 
-import '../bs-components/menu-button.js'
+import './menu-button.js'
 
 const defaultItems = [
   { name: 'Test', value: 1 },

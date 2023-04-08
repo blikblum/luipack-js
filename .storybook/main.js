@@ -16,15 +16,18 @@ const sassRule = {
     },
   ],
 }
-
 module.exports = {
-  core: {
-    builder: 'webpack5',
+  features: {
+    babelModeV7: true,
   },
-  stories: ['../stories/**/*.stories.js'],
+  stories: ['../bs-components/**/*.stories.js'],
   addons: ['@storybook/addon-essentials'],
   webpackFinal: async function (config) {
     config.module.rules.push(sassRule)
     return config
+  },
+  framework: {
+    name: '@storybook/web-components-webpack5',
+    options: {},
   },
 }
