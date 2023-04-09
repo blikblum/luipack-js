@@ -1,5 +1,4 @@
 import { html } from 'lit'
-import 'jquery'
 import 'bootstrap'
 
 import './checkbox-group-input'

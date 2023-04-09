@@ -1,6 +1,5 @@
 import { html } from 'lit'
 import { Collection } from 'nextbone'
-import 'jquery'
 import 'bootstrap'
 
 import './data-table.js'
