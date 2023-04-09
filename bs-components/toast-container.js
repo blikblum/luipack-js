@@ -12,6 +12,17 @@ function getTitleForType(type) {
   }
 }
 
+function getConfigForType(type) {
+  switch (type) {
+    case 'error':
+      return { delay: 30000 }
+    case 'warning':
+      return { delay: 10000 }
+    default:
+      return {}
+  }
+}
+
 export class ToastContainer extends Component {
   @property({ attribute: false })
   toasts = []
@@ -22,7 +33,7 @@ export class ToastContainer extends Component {
 
   toastChanged(element, toast) {
     if (element) {
-      const config = { ...Toast.Default, ...toast }
+      const config = { ...Toast.Default, ...getConfigForType(toast.type), ...toast }
       let instance = Toast.getInstance(element)
       if (!instance) {
         instance = new Toast(element, config)
