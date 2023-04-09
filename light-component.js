@@ -3,6 +3,8 @@ import { customElement, property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
+import { ref, createRef } from 'lit/directives/ref.js'
+import { repeat } from 'lit/directives/repeat.js'
 
 class Component extends LitElement {
   createRenderRoot() {
@@ -11,4 +13,15 @@ class Component extends LitElement {
   }
 }
 
-export { Component, customElement, html, property, classMap, styleMap, ifDefined }
+export {
+  Component,
+  customElement,
+  html,
+  property,
+  classMap,
+  styleMap,
+  ifDefined,
+  repeat,
+  ref,
+  createRef,
+}
