@@ -38,9 +38,13 @@ export class ToastContainer extends Component {
       if (!instance) {
         instance = new Toast(element, config)
         instance.show()
-        element.addEventListener('hidden.bs.toast', () => {
-          this.toasts = this.toasts.filter((item) => item !== toast)
-        })
+        element.addEventListener(
+          'hidden.bs.toast',
+          () => {
+            this.toasts = this.toasts.filter((item) => item !== toast)
+          },
+          { once: true }
+        )
       }
     }
   }
