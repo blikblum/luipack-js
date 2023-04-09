@@ -23,7 +23,19 @@ function getConfigForType(type) {
   }
 }
 
+const positionClassMap = {
+  'top-left': 'top-0 start-0',
+  'top-center': 'top-0 start-50 translate-middle-x',
+  'top-right': 'top-0 end-0',
+}
+
 export class ToastContainer extends Component {
+  @property({ attribute: 'content-class' })
+  contentClass
+
+  @property({})
+  position
+
   @property({ attribute: false })
   toasts = []
 
@@ -50,8 +62,9 @@ export class ToastContainer extends Component {
   }
 
   render() {
+    const { position, contentClass = '' } = this
     return html`
-      <div class="toast-container">
+      <div class="toast-container ${positionClassMap[position] || ''} ${contentClass}">
         ${repeat(
           this.toasts,
           (toast) => toast,

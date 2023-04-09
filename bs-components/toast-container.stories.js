@@ -3,6 +3,15 @@ import './toast-container.js'
 export default {
   title: 'Components/ToastContainer',
   component: 'toast-container',
+  args: {
+    contentClass: 'p-3',
+  },
+  argTypes: {
+    position: {
+      options: ['top-left', 'top-center', 'top-right'],
+      control: { type: 'radio' },
+    },
+  },
 }
 
 const defaultToasts = [{ message: 'Operation successful' }]
