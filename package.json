@@ -1,6 +1,6 @@
 {
   "name": "luipack",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Arbitrary collection of components, templates and utils",
   "main": "index.js",
   "repository": "https://github.com/blikblum/luipack-js.git",
