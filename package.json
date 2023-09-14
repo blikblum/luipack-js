@@ -12,6 +12,7 @@
   },
   "files": [
     "bs-components",
+    "data",
     "light-component.js"
   ],
   "devDependencies": {
