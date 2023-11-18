@@ -1,18 +1,20 @@
-import { Component, html, property } from '../light-component.js'
+import { Component, html } from '../light-component.js'
 
 const stopEvent = (e) => {
   e.stopPropagation()
 }
 
 export class StringArrayInput extends Component {
-  @property({ type: Array, attribute: false })
-  value
+  static properties = {
+    value: { attribute: false },
+    name: { type: String },
+    placeholder: { type: String },
+  }
 
-  @property({ type: String })
-  name
-
-  @property({ type: String })
-  placeholder = 'Add another'
+  constructor() {
+    super()
+    this.placeholder = 'Add another'
+  }
 
   triggerChange() {
     this.dispatchEvent(new CustomEvent('change', { bubbles: true }))

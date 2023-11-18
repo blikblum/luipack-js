@@ -1,42 +1,31 @@
 import { event, view, state } from 'nextbone'
-import { Component, html, property, classMap } from '../light-component.js'
+import { Component, html, classMap } from '../light-component.js'
 
 import './menu-button.scss'
 
 @view
 class MenuButton extends Component {
-  @property({ attribute: false })
-  items
+  static properties = {
+    items: { attribute: false },
+    collection: { attribute: false },
+    icon: { type: String },
+    type: { type: String },
+    caption: { type: String },
+    fixedCaption: { type: Boolean, attribute: 'fixed-caption' },
+    sm: { type: Boolean },
+    lg: { type: Boolean },
+    valueAttr: { type: String, attribute: 'value-attr' },
+    nameAttr: { type: String, attribute: 'name-attr' },
+    value: {},
+  }
 
   @state
   collection
 
-  @property({ type: String })
-  icon
-
-  @property({ type: String })
-  type = 'secondary'
-
-  @property({ type: String })
-  caption
-
-  @property({ type: Boolean, attribute: 'fixed-caption' })
-  fixedCaption
-
-  @property({ type: Boolean })
-  sm
-
-  @property({ type: Boolean })
-  lg
-
-  @property({ type: String, attribute: 'value-attr' })
-  valueAttr
-
-  @property({ type: String, attribute: 'name-attr' })
-  nameAttr
-
-  @property({})
-  value
+  constructor() {
+    super()
+    this.type = 'secondary'
+  }
 
   @event('click', '.dropdown-item')
   itemClick(e) {

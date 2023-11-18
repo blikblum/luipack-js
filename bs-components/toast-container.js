@@ -1,4 +1,4 @@
-import { Component, html, property, ref, repeat } from '../light-component.js'
+import { Component, html, ref, repeat } from '../light-component.js'
 import Toast from 'bootstrap/js/dist/toast.js'
 
 function getTitleForType(type) {
@@ -30,14 +30,16 @@ const positionClassMap = {
 }
 
 export class ToastContainer extends Component {
-  @property({ attribute: 'content-class' })
-  contentClass
+  static properties = {
+    position: { type: String },
+    contentClass: { attribute: 'content-class' },
+    toasts: { attribute: false },
+  }
 
-  @property({})
-  position
-
-  @property({ attribute: false })
-  toasts = []
+  constructor() {
+    super()
+    this.toasts = []
+  }
 
   add(toast) {
     this.toasts = [...this.toasts, toast]

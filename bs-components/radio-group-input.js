@@ -1,17 +1,12 @@
-import { Component, html, property } from '../light-component.js'
+import { Component, html } from '../light-component.js'
 
 export default class RadioGroupInput extends Component {
-  @property({ attribute: false })
-  value
-
-  @property({ type: String })
-  name
-
-  @property({ type: Boolean, attribute: 'with-other' })
-  withOther
-
-  @property({ type: Array, attribute: false })
-  items
+  static properties = {
+    value: { attribute: false },
+    name: { type: String },
+    withOther: { type: Boolean, attribute: 'with-other' },
+    items: { type: Array, attribute: false },
+  }
 
   updateValue(value) {
     this.value = value
