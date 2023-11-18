@@ -19,8 +19,13 @@ const items = [
   { name: 'Solicitação de exames', value: 3 },
 ]
 
-const Template = ({ value }) =>
-  html`<checkbox-group-input name="test" .value=${value} .items=${items}></checkbox-group-input>`
+const Template = ({ value, inline }) =>
+  html`<checkbox-group-input
+    name="test"
+    .value=${value}
+    .items=${items}
+    ?inline=${inline}
+  ></checkbox-group-input>`
 
 export const ArrayValue = Template.bind({})
 ArrayValue.args = {
@@ -40,6 +45,11 @@ ObjectValue.args = {
 export const ObjectValueEmpty = Template.bind({})
 ObjectValueEmpty.args = {
   value: {},
+}
+
+export const Inline = Template.bind({})
+Inline.args = {
+  inline: true,
 }
 
 const FormGroupTemplate = ({ value, invalidFeedback }) =>

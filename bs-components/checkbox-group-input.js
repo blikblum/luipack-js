@@ -1,19 +1,17 @@
 import { event } from 'nextbone'
-import { Component, html, property } from '../light-component.js'
+import { Component, html } from '../light-component.js'
 
 import './checkbox-group-input.scss'
 
 let checkboxGroupCount = 0
 
 export default class CheckboxGroupInput extends Component {
-  @property({ attribute: false })
-  value
-
-  @property({ type: String })
-  name
-
-  @property({ type: Array, attribute: false })
-  items
+  static properties = {
+    value: { attribute: false },
+    name: { type: String },
+    inline: { type: Boolean },
+    items: { attribute: false },
+  }
 
   _idPrefix = `checkboxgroup${checkboxGroupCount++}-`
 
@@ -72,7 +70,7 @@ export default class CheckboxGroupInput extends Component {
       ${items.map((item, i) => {
         const id = `${this._idPrefix}${i}`
         return html`
-          <div class="form-check">
+          <div class="form-check ${this.inline ? 'form-check-inline' : ''}">
             <input
               id=${id}
               type="checkbox"
