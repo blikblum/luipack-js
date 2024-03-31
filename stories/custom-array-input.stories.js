@@ -193,3 +193,37 @@ CheckboxGroup.args = {
     `
   },
 }
+
+export const TextArea = Template.bind({})
+TextArea.args = {
+  itemRender(item) {
+    return html`
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input
+              name="name"
+              class="form-control"
+              type="text"
+              placeholder="Name"
+              .value=${item.name || null}
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">Value</label>
+            <textarea
+              name="value"
+              class="form-control"
+              type="text"
+              placeholder="Value"
+              .value=${item.value || null}
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    `
+  },
+}

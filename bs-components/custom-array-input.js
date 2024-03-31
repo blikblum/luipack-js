@@ -6,6 +6,8 @@ function resolveValue(value) {
   return value || {}
 }
 
+const formControlsSelector = 'input, select, textarea, [custom-input]'
+
 class CustomArrayInput extends Component {
   @property({ type: String, attribute: 'add-label' })
   addLabel
@@ -28,13 +30,11 @@ class CustomArrayInput extends Component {
   constructor() {
     super()
     delegate(this, 'click', '.dropdown-item', this.addItemClick, this)
-    delegate(this, 'input', 'input, [custom-input]', this.inputInputHandler, this)
-    delegate(this, 'change', 'input, [custom-input]', this.inputChangeHandler, this)
+    delegate(this, 'input', formControlsSelector, this.inputInputHandler, this)
+    delegate(this, 'change', formControlsSelector, this.inputChangeHandler, this)
   }
 
-  inputInputHandler(e) {
-    e.stopPropagation()
-    const input = e.selectorTarget
+  inputHandler(input) {
     const attr = input.name
     if (!attr) {
       return
@@ -64,9 +64,20 @@ class CustomArrayInput extends Component {
     this.editItem(index, { ...item, [attr]: value || undefined })
   }
 
+  inputInputHandler(e) {
+    e.stopPropagation()
+    const input = e.selectorTarget
+    if (input.tagName !== 'TEXTAREA') {
+      this.inputHandler(input)
+    }
+  }
+
   inputChangeHandler(e) {
     e.stopPropagation()
-    // todo: handle radio /checkbox here?
+    const input = e.selectorTarget
+    if (input.tagName === 'TEXTAREA') {
+      this.inputHandler(input)
+    }
   }
 
   triggerChange() {
