@@ -19,13 +19,15 @@ export default {
           <div class="col">
             <div class="mb-3">
               <label class="form-label">Name</label>
-              <input
+              <select
                 name="name"
-                class="form-control"
-                type="text"
+                class="form-select"
                 placeholder="Name"
                 .value=${item.name || null}
-              />
+              >
+                <option value="Hello">Hello</option>
+                <option value="World">World</option>
+              </select>
             </div>
           </div>
           <div class="col">
@@ -186,6 +188,40 @@ CheckboxGroup.args = {
                 ></checkbox-group-input>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+}
+
+export const TextArea = Template.bind({})
+TextArea.args = {
+  itemRender(item) {
+    return html`
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input
+              name="name"
+              class="form-control"
+              type="text"
+              placeholder="Name"
+              .value=${item.name || null}
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">Value</label>
+            <textarea
+              name="value"
+              class="form-control"
+              type="text"
+              placeholder="Value"
+              .value=${item.value || null}
+            ></textarea>
           </div>
         </div>
       </div>
