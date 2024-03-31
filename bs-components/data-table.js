@@ -145,8 +145,6 @@ class DataTable extends Component {
         </tr>`
       }
 
-      const rowClasses = ``
-
       return html`
         <tr
           class="item-row ${rowClassesFn(model, i)} ${model === this.selected
@@ -172,7 +170,6 @@ class DataTable extends Component {
       'table-hover': this.hover,
       'table-bordered': this.bordered,
       'table-borderless': this.borderless,
-      'table-responsive': this.responsive,
       'table-striped': this.striped,
       'table-sm': this.sm,
     }
@@ -183,18 +180,20 @@ class DataTable extends Component {
     }
 
     return html`
-      <table class="table ${classMap(tableClasses)}">
-        <thead class=${classMap(theadClasses)}>
-          <tr>
-            ${this.fields.map((field) => {
-              return html` <th style=${styleMap(field.styles || {})}>${field.title}</th> `
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          ${this.renderBody()}
-        </tbody>
-      </table>
+      <div class=${this.responsive ? 'table-responsive' : ''}>
+        <table class="table ${classMap(tableClasses)}">
+          <thead class=${classMap(theadClasses)}>
+            <tr>
+              ${this.fields.map((field) => {
+                return html` <th style=${styleMap(field.styles || {})}>${field.title}</th> `
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            ${this.renderBody()}
+          </tbody>
+        </table>
+      </div>
     `
   }
 }
