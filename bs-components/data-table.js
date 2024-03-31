@@ -1,5 +1,5 @@
 import { Component, classMap, styleMap, property, html } from '../light-component.js'
-import { state, event } from 'nextbone'
+import { state, eventHandler } from 'nextbone'
 import { isEqual, isPlainObject } from 'lodash-es'
 
 class DataTableActionEvent extends Event {
@@ -69,7 +69,7 @@ class DataTable extends Component {
 
   rowClasses
 
-  @event('click', 'tr.item-row')
+  @eventHandler('click', 'tr.item-row')
   onRowClick(e) {
     this.dispatchEvent(
       new CustomEvent('row-select', {
@@ -79,14 +79,14 @@ class DataTable extends Component {
     )
   }
 
-  @event('click', '[data-toggle="editor"]')
+  @eventHandler('click', '[data-toggle="editor"]')
   onToggleEditorClick(e) {
     const rowEl = e.selectorTarget.closest('.item-row')
     const rowModel = rowEl ? rowEl.model : undefined
     this.editing = rowModel
   }
 
-  @event('click', 'tr.item-row [data-action]')
+  @eventHandler('click', 'tr.item-row [data-action]')
   onActionClick(e) {
     const actionEl = e.selectorTarget
     const rowEl = actionEl.closest('.item-row')

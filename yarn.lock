@@ -7193,7 +7193,7 @@ __metadata:
     jquery: ^3.6.4
     lit: ^2.7.2
     lodash-es: ^4.17.21
-    nextbone: ^0.25.0
+    nextbone: ^0.27.3
     node-sass: ^8.0.0
     pivot-utils: ^0.2.1
     popper.js: ^1.16.1
@@ -7719,12 +7719,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nextbone@npm:^0.25.0":
-  version: 0.25.0
-  resolution: "nextbone@npm:0.25.0"
+"nextbone@npm:^0.27.3":
+  version: 0.27.3
+  resolution: "nextbone@npm:0.27.3"
   dependencies:
     lodash-es: ^4.17.21
-  checksum: f971d358f1fc7f9bd963c1a16870601b2e6c47803560c774f7921057a93f4b75590060542ee1cd538876167a60f562836678fc36bb210c3926518d779037f5f4
+  checksum: e289d84c594fafa8aca0985792285ca6741ed07f17af15595243912d15898e2b63cab0b4bc09798c672ce48d3e03bb829fb23fd31f261425f5bab8ffdedaa278
   languageName: node
   linkType: hard
 
