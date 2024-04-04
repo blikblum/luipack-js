@@ -4,15 +4,6 @@ import { defaultsDeep } from 'lodash-es'
 import { getChartDatasets } from './analyticsUtils.js'
 
 class PivotDataEx extends PivotData {
-  filter(record) {
-    for (const k in this.props.valueFilter) {
-      if (!(record[k] in this.props.valueFilter[k])) {
-        return false
-      }
-    }
-    return true
-  }
-
   getRecords(rowKey, colKey) {
     const result = []
     PivotData.forEachRecord(this.props.data, this.props.derivedAttributes, (record) => {

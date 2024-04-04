@@ -7165,7 +7165,7 @@ __metadata:
     lodash-es: ^4.17.21
     nextbone: ^0.27.3
     node-sass: ^8.0.0
-    pivot-utils: ^0.2.1
+    pivot-utils: ^0.3.0
     popper.js: ^1.16.1
     prettier: ^2.8.7
     react: ^18.2.0
@@ -8274,12 +8274,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pivot-utils@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "pivot-utils@npm:0.2.1"
+"pivot-utils@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "pivot-utils@npm:0.3.0"
   peerDependencies:
     lit: ^2.5.0
-  checksum: 2a9111a9d01004fd3124e2359c987124efcb5f254bc91ffc435e9f5b5f3d1f1e989558ae97364ac3ce2c39f3070003a8fc5757ced9b582492a788db5cb5384c1
+  checksum: 20cb15a5fbccb4e139a4f5331aa36eaa2d081f33e019c78f7dd84fa6ecdbc3604ca59fef1f8f0e384c47077ed3927f374f0e5ad351063be9b7f088ba33a73e36
   languageName: node
   linkType: hard
 
