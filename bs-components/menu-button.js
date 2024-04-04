@@ -1,10 +1,9 @@
-import { event, view, state } from 'nextbone'
+import { delegate, view } from 'nextbone'
 import { Component, html, classMap } from '../light-component.js'
 
 import './menu-button.scss'
 
-@view
-class MenuButton extends Component {
+class MenuButton extends view(Component) {
   static properties = {
     items: { attribute: false },
     collection: { attribute: false },
@@ -19,15 +18,16 @@ class MenuButton extends Component {
     value: {},
   }
 
-  @state
-  collection
+  static states = {
+    collection: {},
+  }
 
   constructor() {
     super()
     this.type = 'secondary'
+    delegate(this, 'click', '.dropdown-item', this.itemClick)
   }
 
-  @event('click', '.dropdown-item')
   itemClick(e) {
     const { item } = e.selectorTarget
     if (item) {

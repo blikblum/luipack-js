@@ -1,4 +1,4 @@
-import { event } from 'nextbone'
+import { delegate } from 'nextbone'
 import { Component, html } from '../light-component.js'
 
 import './checkbox-group-input.scss'
@@ -14,6 +14,12 @@ export default class CheckboxGroupInput extends Component {
   }
 
   _idPrefix = `checkboxgroup${checkboxGroupCount++}-`
+
+  constructor() {
+    super()
+    delegate(this, 'change', 'input', this.itemCheckboxChange)
+    delegate(this, 'input', 'input', this.itemCheckboxInput)
+  }
 
   updateValue(itemValue, checked) {
     // todo: only trigger change / update value if state changed
@@ -42,13 +48,11 @@ export default class CheckboxGroupInput extends Component {
     this.requestUpdate()
   }
 
-  @event('change', 'input')
   itemCheckboxChange(e) {
     e.preventDefault()
     e.stopPropagation()
   }
 
-  @event('input', 'input')
   itemCheckboxInput(e) {
     e.preventDefault()
     e.stopPropagation()

@@ -1,5 +1,5 @@
-import { Component, classMap, styleMap, property, html } from '../light-component.js'
-import { state, eventHandler } from 'nextbone'
+import { Component, classMap, styleMap, html } from '../light-component.js'
+import { delegate, view } from 'nextbone'
 import { isEqual, isPlainObject } from 'lodash-es'
 
 class DataTableActionEvent extends Event {
@@ -11,21 +11,35 @@ class DataTableActionEvent extends Event {
   }
 }
 
-class DataTable extends Component {
-  @property({ attribute: false })
-  fields = []
+class DataTable extends view(Component) {
+  static properties = {
+    fields: { attribute: false },
+    selected: { attribute: false },
+    editing: { attribute: false },
+    emptyMessage: { type: String, attribute: 'empty-message' },
+    // css options
+    dark: { type: Boolean },
+    hover: { type: Boolean },
+    bordered: { type: Boolean },
+    borderless: { type: Boolean },
+    responsive: { type: Boolean },
+    sm: { type: Boolean },
+    striped: { type: Boolean },
+    theadDark: { type: Boolean, attribute: 'thead-dark' },
+    theadLight: { type: Boolean, attribute: 'thead-light' },
+  }
 
-  @property({ attribute: false })
-  selected
+  static states = {
+    collection: {},
+  }
 
-  @property({ attribute: false })
-  editing
-
-  @property({ attribute: 'empty-message' })
-  emptyMessage
-
-  @state
-  collection
+  constructor() {
+    super()
+    this.fields = []
+    delegate(this, 'click', 'tr.item-row', this.onRowClick)
+    delegate(this, 'click', '[data-toggle="editor"]', this.onToggleEditorClick)
+    delegate(this, 'click', 'tr.item-row [data-action]', this.onActionClick)
+  }
 
   _params = {}
 
@@ -37,39 +51,10 @@ class DataTable extends Component {
     }
   }
 
-  // css options
-  @property({ type: Boolean })
-  dark
-
-  @property({ type: Boolean })
-  hover
-
-  @property({ type: Boolean })
-  bordered
-
-  @property({ type: Boolean })
-  borderless
-
-  @property({ type: Boolean })
-  responsive
-
-  @property({ type: Boolean })
-  sm
-
-  @property({ type: Boolean })
-  striped
-
-  @property({ type: Boolean, attribute: 'thead-dark' })
-  theadDark
-
-  @property({ type: Boolean, attribute: 'thead-light' })
-  theadLight
-
   renderEditor
 
   rowClasses
 
-  @eventHandler('click', 'tr.item-row')
   onRowClick(e) {
     this.dispatchEvent(
       new CustomEvent('row-select', {
@@ -79,14 +64,12 @@ class DataTable extends Component {
     )
   }
 
-  @eventHandler('click', '[data-toggle="editor"]')
   onToggleEditorClick(e) {
     const rowEl = e.selectorTarget.closest('.item-row')
     const rowModel = rowEl ? rowEl.model : undefined
     this.editing = rowModel
   }
 
-  @eventHandler('click', 'tr.item-row [data-action]')
   onActionClick(e) {
     const actionEl = e.selectorTarget
     const rowEl = actionEl.closest('.item-row')

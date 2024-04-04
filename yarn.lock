@@ -42,7 +42,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.11.6, @babel/core@npm:^7.12.10, @babel/core@npm:^7.12.3, @babel/core@npm:^7.13.16, @babel/core@npm:^7.20.2, @babel/core@npm:^7.21.4, @babel/core@npm:~7.21.0":
+"@babel/core@npm:^7.11.6, @babel/core@npm:^7.12.10, @babel/core@npm:^7.12.3, @babel/core@npm:^7.13.16, @babel/core@npm:^7.20.2, @babel/core@npm:~7.21.0":
   version: 7.21.4
   resolution: "@babel/core@npm:7.21.4"
   dependencies:
@@ -424,21 +424,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-decorators@npm:^7.21.0":
-  version: 7.21.0
-  resolution: "@babel/plugin-proposal-decorators@npm:7.21.0"
-  dependencies:
-    "@babel/helper-create-class-features-plugin": ^7.21.0
-    "@babel/helper-plugin-utils": ^7.20.2
-    "@babel/helper-replace-supers": ^7.20.7
-    "@babel/helper-split-export-declaration": ^7.18.6
-    "@babel/plugin-syntax-decorators": ^7.21.0
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 2889a060010af7ac2e24f7a193262e50a94e254dd86d273e25a2bec2a2f97dd95b136bb933f63448c1cdde4f38ac7877837685657aa8161699eb226d9f1eb453
-  languageName: node
-  linkType: hard
-
 "@babel/plugin-proposal-dynamic-import@npm:^7.18.6":
   version: 7.18.6
   resolution: "@babel/plugin-proposal-dynamic-import@npm:7.18.6"
@@ -619,17 +604,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 3e80814b5b6d4fe17826093918680a351c2d34398a914ce6e55d8083d72a9bdde4fbaf6a2dcea0e23a03de26dc2917ae3efd603d27099e2b98380345703bf948
-  languageName: node
-  linkType: hard
-
-"@babel/plugin-syntax-decorators@npm:^7.21.0":
-  version: 7.21.0
-  resolution: "@babel/plugin-syntax-decorators@npm:7.21.0"
-  dependencies:
-    "@babel/helper-plugin-utils": ^7.20.2
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 31108e73c3e569f2795ddb4f5f1f32c13c6be97a107d41e318c8f58ca3fde0fa958af3d1a302ab64f36f73ce4d6dda7889732243561c087a7cc3b22192d42a65
   languageName: node
   linkType: hard
 
@@ -4015,7 +3989,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:^7.0.0 || ^8.0.0 || ^9.0.0, babel-loader@npm:^9.0.0, babel-loader@npm:^9.1.2":
+"babel-loader@npm:^7.0.0 || ^8.0.0 || ^9.0.0, babel-loader@npm:^9.0.0":
   version: 9.1.2
   resolution: "babel-loader@npm:9.1.2"
   dependencies:
@@ -7180,14 +7154,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "luipack@workspace:."
   dependencies:
-    "@babel/core": ^7.21.4
-    "@babel/plugin-proposal-class-properties": ^7.18.6
-    "@babel/plugin-proposal-decorators": ^7.21.0
     "@popperjs/core": ^2.11.7
     "@storybook/addon-essentials": ^7.0.2
     "@storybook/web-components": ^7.0.2
     "@storybook/web-components-webpack5": ^7.0.2
-    babel-loader: ^9.1.2
     bootstrap: ^5.2.3
     css-loader: ^6.7.3
     jquery: ^3.6.4

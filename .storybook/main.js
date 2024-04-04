@@ -17,9 +17,6 @@ const sassRule = {
   ],
 }
 module.exports = {
-  features: {
-    babelModeV7: true,
-  },
   stories: ['../bs-components/**/*.stories.js'],
   addons: ['@storybook/addon-essentials'],
   webpackFinal: async function (config) {
