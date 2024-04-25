@@ -24,25 +24,26 @@ export default class CheckboxGroupInput extends Component {
   updateValue(itemValue, checked) {
     // todo: only trigger change / update value if state changed
     let value = this.value || []
+    let newValue
     if (Array.isArray(value)) {
       const valueIndex = value.indexOf(itemValue)
+      newValue = [...value]
       if (checked) {
         if (valueIndex === -1) {
-          value.push(itemValue)
+          newValue.push(itemValue)
         }
       } else if (valueIndex !== -1) {
-        value.splice(valueIndex, 1)
+        newValue.splice(valueIndex, 1)
       }
-      value = value.slice()
     } else {
+      newValue = { ...value }
       if (checked) {
-        value[itemValue] = true
+        newValue[itemValue] = true
       } else {
-        delete value[itemValue]
+        delete newValue[itemValue]
       }
-      value = { ...value }
     }
-    this.value = value
+    this.value = newValue
     this.dispatchEvent(new InputEvent('change', { bubbles: true }))
     this.dispatchEvent(new InputEvent('input', { bubbles: true }))
     this.requestUpdate()

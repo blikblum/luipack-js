@@ -34,7 +34,7 @@ ArrayValue.args = {
 
 export const ArrayValueEmpty = Template.bind({})
 ArrayValueEmpty.args = {
-  value: [2],
+  value: [],
 }
 
 export const ObjectValue = Template.bind({})
