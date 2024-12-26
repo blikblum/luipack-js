@@ -10,6 +10,7 @@ export default class CheckboxGroupInput extends Component {
     value: { attribute: false },
     name: { type: String },
     inline: { type: Boolean },
+    disabled: { type: Boolean },
     items: { attribute: false },
   }
 
@@ -82,6 +83,7 @@ export default class CheckboxGroupInput extends Component {
               name=${this.name}
               class="form-check-input"
               data-index=${i}
+              ?disabled=${this.disabled}
               .checked=${this.valueContainsItemValue(item.value)}
             />
             <label class="form-check-label" for=${id}>${item.name}</label>

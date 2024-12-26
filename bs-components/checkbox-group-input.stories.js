@@ -3,57 +3,58 @@ import 'bootstrap'
 
 import './checkbox-group-input'
 
+const defaultItems = [
+  { name: 'USG Renal', value: 1 },
+  { name: 'Relatório Sisnefro', value: 2 },
+  { name: 'Solicitação de exames', value: 3 },
+]
+
 export default {
   title: 'Components/CheckBoxInputGroup',
+  component: 'checkbox-group-input',
   parameters: {
     layout: 'centered',
     actions: {
       handles: ['change checkbox-group-input'],
     },
   },
+  args: {
+    items: defaultItems,
+  },
 }
 
-const items = [
-  { name: 'USG Renal', value: 1 },
-  { name: 'Relatório Sisnefro', value: 2 },
-  { name: 'Solicitação de exames', value: 3 },
-]
-
-const Template = ({ value, inline }) =>
-  html`<checkbox-group-input
-    name="test"
-    .value=${value}
-    .items=${items}
-    ?inline=${inline}
-  ></checkbox-group-input>`
-
-export const ArrayValue = Template.bind({})
+export const ArrayValue = {}
 ArrayValue.args = {
   value: [2],
 }
 
-export const ArrayValueEmpty = Template.bind({})
+export const ArrayValueEmpty = {}
 ArrayValueEmpty.args = {
   value: [],
 }
 
-export const ObjectValue = Template.bind({})
+export const ObjectValue = {}
 ObjectValue.args = {
   value: { 2: true },
 }
 
-export const ObjectValueEmpty = Template.bind({})
+export const ObjectValueEmpty = {}
 ObjectValueEmpty.args = {
   value: {},
 }
 
-export const Inline = Template.bind({})
+export const Inline = {}
 Inline.args = {
   inline: true,
 }
 
-const FormGroupTemplate = ({ value, invalidFeedback }) =>
-  html`
+export const Disabled = {}
+Disabled.args = {
+  disabled: true,
+}
+
+function formGroupRender({ items, value, invalidFeedback }) {
+  return html`
     <div class="mb-3">
       <label class="form-label">Pendências</label>
       <checkbox-group-input
@@ -65,8 +66,9 @@ const FormGroupTemplate = ({ value, invalidFeedback }) =>
       ${invalidFeedback ? html`<div class="invalid-feedback">${invalidFeedback}</div>` : ''}
     </div>
   `
-export const FormGroup = FormGroupTemplate.bind({})
+}
+export const FormGroup = { render: formGroupRender }
 FormGroup.args = {}
 
-export const FormGroupInvalid = FormGroupTemplate.bind({})
+export const FormGroupInvalid = { render: formGroupRender }
 FormGroupInvalid.args = { invalidFeedback: 'There an error' }
