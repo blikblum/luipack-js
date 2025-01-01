@@ -1,4 +1,5 @@
 import { Collection } from 'nextbone'
+import { html } from './light-component.js'
 
 import $ from 'jquery'
 import 'datatables.net'
@@ -117,6 +118,71 @@ export const Default = {}
 export const CollectionData = {
   args: {
     data: defaultCollection,
+  },
+}
+
+const updatableCollection = new Collection(defaultData)
+
+function addModel() {
+  updatableCollection.add({
+    id: updatableCollection.length + 1,
+    name: 'New Model',
+    bed: updatableCollection.length + 1,
+    sector: 'Enfermaria B',
+  })
+}
+
+function removeModel() {
+  updatableCollection.remove(updatableCollection.last())
+}
+
+function setModels() {
+  updatableCollection.set([
+    {
+      id: 1,
+      name: 'Jim Jones',
+      bed: 1,
+      sector: 'Enfermaria B',
+      registry: '2000',
+    },
+    {
+      id: 2,
+      name: 'João Silva',
+      bed: 2,
+      sector: 'Enfermaria A',
+      registry: '2001',
+      tags: ['tag a', 'tag b'],
+    },
+    {
+      id: 99,
+      name: 'Strange Model',
+      bed: 2,
+      sector: 'Enfermaria A',
+      registry: '2001',
+    },
+  ])
+}
+
+function resetCollection() {
+  updatableCollection.reset(defaultData)
+}
+
+export const CollectionUpdates = {
+  args: {
+    data: updatableCollection,
+  },
+  render({ data, config }) {
+    return html`<div class="row">
+        <div class="col">
+          <button type="button" class="btn" @click=${resetCollection}>Reset</button>
+        </div>
+        <div class="col"><button type="button" class="btn" @click=${addModel}>Add</button></div>
+        <div class="col">
+          <button type="button" class="btn" @click=${removeModel}>Remove</button>
+        </div>
+        <div class="col"><button type="button" class="btn" @click=${setModels}>Set</button></div>
+      </div>
+      <dt-table .data=${data} .config=${config}></dt-table>`
   },
 }
 

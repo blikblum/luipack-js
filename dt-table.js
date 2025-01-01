@@ -4,6 +4,10 @@ import DataTable from 'datatables.net'
 
 import { Component, html } from './light-component.js'
 
+/**
+ * @import {Model} from 'nextbone'
+ */
+
 class RowEvent extends Event {
   constructor(name, props = {}) {
     super(name, { bubbles: true })
@@ -29,9 +33,26 @@ export class DTDataAdapter {
     cb()
   }
 
+  getRowId(rowData) {
+    return rowData.DT_RowId
+  }
+
   getRowEventProps(rowData) {
     return { data: rowData }
   }
+}
+
+/**
+ * @param {object} changes
+ * @param {Model[]} changes.added
+ * @param {Model[]} changes.merged
+ * @param {Model[]} changes.removed
+ */
+function mapCollectionChanges(changes) {
+  const added = changes.added.map((model) => ({ ...model.attributes, DT_RowId: model.cid }))
+  const changed = changes.merged.map((model) => ({ ...model.attributes, DT_RowId: model.cid }))
+  const removed = changes.removed.map((model) => ({ ...model.attributes, DT_RowId: model.cid }))
+  return { added, changed, removed }
 }
 
 export class DTCollectionAdapter extends DTDataAdapter {
@@ -40,17 +61,26 @@ export class DTCollectionAdapter extends DTDataAdapter {
   }
 
   getData() {
-    return this.value.toJSON({ computed: true })
+    return this.value.models.map((model) => ({ ...model.attributes, DT_RowId: model.cid }))
   }
 
   observe(cb) {
     const value = this.value
-    value.on('update reset', cb)
-    return () => value.off('update reset', cb)
+    const listener = (_, { changes }) => {
+      const cbArg = changes ? mapCollectionChanges(changes) : undefined
+      cb(cbArg)
+    }
+    value.on('update reset', listener)
+    return () => value.off('update reset', listener)
+  }
+
+  getRowId(rowData) {
+    return rowData.DT_RowId
   }
 
   getRowEventProps(rowData) {
-    return { model: this.value.get(rowData.id), data: rowData }
+    const model = this.value.get(rowData.DT_RowId)
+    return { model, data: { ...model.attributes } }
   }
 }
 
@@ -87,7 +117,7 @@ class DataTablesTable extends Component {
       }
       const Adapter = dataAdapters.find((adapter) => adapter.test(this.data)) || DTDataAdapter
       const adapter = new Adapter(this.data)
-      this._dataUnobserve = adapter.observe(() => this.updateData())
+      this._dataUnobserve = adapter.observe((changes) => this.updateData(changes))
       this._dataAdapter = adapter
     }
   }
@@ -109,13 +139,34 @@ class DataTablesTable extends Component {
     }
   }
 
-  updateData() {
-    if (!this._dataTable) {
+  updateData(changes) {
+    const { _dataTable, _dataAdapter } = this
+    if (!_dataTable) {
       return
     }
-    const tableData = this.getTableData()
-    this._dataTable.clear().rows.add(tableData).draw()
-    const searchPanes = this._dataTable.searchPanes
+    if (changes) {
+      if (changes.added && changes.added.length) {
+        _dataTable.rows.add(changes.added)
+      }
+      if (changes.changed) {
+        changes.changed.forEach((data) => {
+          const row = _dataTable.row(`#${_dataAdapter.getRowId(data)}`)
+          row.data(data)
+        })
+      }
+      if (changes.removed) {
+        changes.removed.forEach((data) => {
+          _dataTable.row(`#${_dataAdapter.getRowId(data)}`).remove()
+        })
+      }
+    } else {
+      const tableData = this.getTableData()
+      _dataTable.clear().rows.add(tableData)
+    }
+
+    _dataTable.draw()
+
+    const searchPanes = _dataTable.searchPanes
     if (searchPanes) {
       searchPanes.rebuildPane()
     }
