@@ -27,6 +27,8 @@
     "@storybook/web-components-webpack5": "^7.0.2",
     "bootstrap": "^5.2.3",
     "css-loader": "^6.7.3",
+    "datatables.net": "^2.1.8",
+    "datatables.net-bs5": "^2.1.8",
     "jquery": "^3.6.4",
     "lit": "^2.7.2",
     "lodash-es": "^4.17.21",

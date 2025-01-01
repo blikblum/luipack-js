@@ -4837,6 +4837,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"datatables.net-bs5@npm:^2.1.8":
+  version: 2.1.8
+  resolution: "datatables.net-bs5@npm:2.1.8"
+  dependencies:
+    datatables.net: 2.1.8
+    jquery: ">=1.7"
+  checksum: 8d6c35c96fb6b5cb574171fd8851b0f9bc3d5d605159ba92b7f6bcca730fa545789c0edcad31f88a2d208611245b8fe154f926a9fdc524d85cde85b96f804563
+  languageName: node
+  linkType: hard
+
+"datatables.net@npm:2.1.8, datatables.net@npm:^2.1.8":
+  version: 2.1.8
+  resolution: "datatables.net@npm:2.1.8"
+  dependencies:
+    jquery: ">=1.7"
+  checksum: 84ae84135f8993077ae7914e904f4a6858c6edf59109b0fc39d7324a58268dbd49a024d85ac8b49ec51133cc435051a799ad9f03c534e9aca745e1273397dda7
+  languageName: node
+  linkType: hard
+
 "debug@npm:2.6.9, debug@npm:^2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -6810,6 +6829,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jquery@npm:>=1.7":
+  version: 3.7.1
+  resolution: "jquery@npm:3.7.1"
+  checksum: 4370b8139d6ae82867eb6f7f21d1edccf1d1bdf41c0840920ea80d366c2cd5dbe1ceebb110ee9772aa839b04400faa1572c5c560b507c688ed7b61cea26c0e27
+  languageName: node
+  linkType: hard
+
 "jquery@npm:^3.6.4":
   version: 3.6.4
   resolution: "jquery@npm:3.6.4"
@@ -7160,6 +7186,8 @@ __metadata:
     "@storybook/web-components-webpack5": ^7.0.2
     bootstrap: ^5.2.3
     css-loader: ^6.7.3
+    datatables.net: ^2.1.8
+    datatables.net-bs5: ^2.1.8
     jquery: ^3.6.4
     lit: ^2.7.2
     lodash-es: ^4.17.21

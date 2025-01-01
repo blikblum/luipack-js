@@ -17,7 +17,7 @@ const sassRule = {
   ],
 }
 module.exports = {
-  stories: ['../bs-components/**/*.stories.js'],
+  stories: ['../bs-components/**/*.stories.js', '../*.stories.js'],
   addons: ['@storybook/addon-essentials'],
   webpackFinal: async function (config) {
     config.module.rules.push(sassRule)
