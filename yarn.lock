@@ -1994,6 +1994,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@orchidjs/sifter@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@orchidjs/sifter@npm:1.1.0"
+  dependencies:
+    "@orchidjs/unicode-variants": ^1.1.2
+  checksum: affe38c1b9017f2a98384ba1e79af3b3a08575dcfa34856eb5654008ffb186da5f1168eaa79dd4be21111bd62d127d6f1140ce5400b6fd47f4ca6fa9bc3d4beb
+  languageName: node
+  linkType: hard
+
+"@orchidjs/unicode-variants@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@orchidjs/unicode-variants@npm:1.1.2"
+  checksum: 2b643dfbc67e88158340df8448b065a022a521788b00f648b33ccef6152af8ebb99f91250d80289fbbaecabcd5cacc26b2f7c17aeb525c5922f9ea97b98e0c4d
+  languageName: node
+  linkType: hard
+
 "@popperjs/core@npm:^2.11.7":
   version: 2.11.7
   resolution: "@popperjs/core@npm:2.11.7"
@@ -4837,7 +4853,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"datatables.net-bs5@npm:^2.1.8":
+"datatables.net-bs5@npm:^2, datatables.net-bs5@npm:^2.1.8":
   version: 2.1.8
   resolution: "datatables.net-bs5@npm:2.1.8"
   dependencies:
@@ -4847,7 +4863,49 @@ __metadata:
   languageName: node
   linkType: hard
 
-"datatables.net@npm:2.1.8, datatables.net@npm:^2.1.8":
+"datatables.net-searchpanes-bs5@npm:^2.3.3":
+  version: 2.3.3
+  resolution: "datatables.net-searchpanes-bs5@npm:2.3.3"
+  dependencies:
+    datatables.net-bs5: ^2
+    datatables.net-searchpanes: 2.3.3
+    jquery: ">=1.7"
+  checksum: ea4e543cec20aaa3d4e840e9e9f0f2da1351b9657fb83ba8325232e0a67338533925cf7c2b4d35d746c1221ce48c6619f46af3e25ec6ce65e722524787f313f1
+  languageName: node
+  linkType: hard
+
+"datatables.net-searchpanes@npm:2.3.3, datatables.net-searchpanes@npm:^2.3.3":
+  version: 2.3.3
+  resolution: "datatables.net-searchpanes@npm:2.3.3"
+  dependencies:
+    datatables.net: ^2
+    jquery: ">=1.7"
+  checksum: 5ea878be3c310cb2d6703e0ca96281e8fad2750dd23845652cb787715b1aef8e5fec52c92f4ef48f98280cdd77336c5c5484e7a607ac24129e9f98a669465ddf
+  languageName: node
+  linkType: hard
+
+"datatables.net-select-bs5@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "datatables.net-select-bs5@npm:2.1.0"
+  dependencies:
+    datatables.net-bs5: ^2
+    datatables.net-select: 2.1.0
+    jquery: ">=1.7"
+  checksum: 0dd790f6b27429cbbd2847625cc1942a2f3cdd40601cf70d2436f6f0794aa64e03091b052032e3959cd78ae53f8bcfffdcdcd645741d5a97e52e0c1f228b102b
+  languageName: node
+  linkType: hard
+
+"datatables.net-select@npm:2.1.0":
+  version: 2.1.0
+  resolution: "datatables.net-select@npm:2.1.0"
+  dependencies:
+    datatables.net: ^2
+    jquery: ">=1.7"
+  checksum: ce62b291c45ecd6d90787ca0cbbc1c819ae4d930ba355020f38a98eb70942ea1dfbc570beaf7293ffa552cc3de4f6a2076dc616c96da0ea1054eae74895c7a8c
+  languageName: node
+  linkType: hard
+
+"datatables.net@npm:2.1.8, datatables.net@npm:^2, datatables.net@npm:^2.1.8":
   version: 2.1.8
   resolution: "datatables.net@npm:2.1.8"
   dependencies:
@@ -6829,17 +6887,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jquery@npm:>=1.7":
+"jquery@npm:>=1.7, jquery@npm:^3.7.1":
   version: 3.7.1
   resolution: "jquery@npm:3.7.1"
   checksum: 4370b8139d6ae82867eb6f7f21d1edccf1d1bdf41c0840920ea80d366c2cd5dbe1ceebb110ee9772aa839b04400faa1572c5c560b507c688ed7b61cea26c0e27
-  languageName: node
-  linkType: hard
-
-"jquery@npm:^3.6.4":
-  version: 3.6.4
-  resolution: "jquery@npm:3.6.4"
-  checksum: 8354f7bd0a0424aa714ee1b6b1ef74b410f834eb5c8501682289b358bc151f11677f11188b544f3bb49309d6ec4d15d1a5de175661250c206b06185a252f706f
   languageName: node
   linkType: hard
 
@@ -7188,7 +7239,10 @@ __metadata:
     css-loader: ^6.7.3
     datatables.net: ^2.1.8
     datatables.net-bs5: ^2.1.8
-    jquery: ^3.6.4
+    datatables.net-searchpanes: ^2.3.3
+    datatables.net-searchpanes-bs5: ^2.3.3
+    datatables.net-select-bs5: ^2.1.0
+    jquery: ^3.7.1
     lit: ^2.7.2
     lodash-es: ^4.17.21
     nextbone: ^0.27.3
@@ -7203,6 +7257,7 @@ __metadata:
     sinon-chai-es: ^3.7.0
     storybook: ^7.0.2
     style-loader: ^3.3.2
+    tom-select: ^2.4.1
     vitest: ^0.34.4
   peerDependencies:
     lit: "*"
@@ -9892,6 +9947,16 @@ __metadata:
   version: 1.0.1
   resolution: "toidentifier@npm:1.0.1"
   checksum: 952c29e2a85d7123239b5cfdd889a0dde47ab0497f0913d70588f19c53f7e0b5327c95f4651e413c74b785147f9637b17410ac8c846d5d4a20a5a33eb6dc3a45
+  languageName: node
+  linkType: hard
+
+"tom-select@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "tom-select@npm:2.4.1"
+  dependencies:
+    "@orchidjs/sifter": ^1.1.0
+    "@orchidjs/unicode-variants": ^1.1.2
+  checksum: 99cf2b18a0f1097313e883ff51b035e0e42e8ab0a652def20db97a337c48f07d0a7e0b0bc563b93fa8550d6f5f67534eb25e03c6f487bba63ec39a665c17c86b
   languageName: node
   linkType: hard
 

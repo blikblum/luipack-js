@@ -1,15 +1,21 @@
 import { Collection } from 'nextbone'
 import { html } from './light-component.js'
 
-import $ from 'jquery'
+import 'jquery'
 import 'datatables.net'
 import 'datatables.net-bs5'
 import 'datatables.net-bs5/css/dataTables.bootstrap5.css'
 
+// required by searchpanes
+import 'datatables.net-select-bs5'
+import 'datatables.net-select-bs5/css/select.bootstrap5.css'
+
+import 'datatables.net-searchpanes'
+import 'datatables.net-searchpanes-bs5'
+import 'datatables.net-searchpanes-bs5/css/searchPanes.bootstrap5.css'
+
 import './dt-table.js'
 import './dt-table.scss'
-
-console.log($.fn.dataTable)
 
 const defaultData = [
   {
@@ -167,23 +173,25 @@ function resetCollection() {
   updatableCollection.reset(defaultData)
 }
 
+function renderCollectionUpdates({ data, config }) {
+  return html`<div class="row">
+      <div class="col">
+        <button type="button" class="btn" @click=${resetCollection}>Reset</button>
+      </div>
+      <div class="col"><button type="button" class="btn" @click=${addModel}>Add</button></div>
+      <div class="col">
+        <button type="button" class="btn" @click=${removeModel}>Remove</button>
+      </div>
+      <div class="col"><button type="button" class="btn" @click=${setModels}>Set</button></div>
+    </div>
+    <dt-table .data=${data} .config=${config}></dt-table>`
+}
+
 export const CollectionUpdates = {
   args: {
     data: updatableCollection,
   },
-  render({ data, config }) {
-    return html`<div class="row">
-        <div class="col">
-          <button type="button" class="btn" @click=${resetCollection}>Reset</button>
-        </div>
-        <div class="col"><button type="button" class="btn" @click=${addModel}>Add</button></div>
-        <div class="col">
-          <button type="button" class="btn" @click=${removeModel}>Remove</button>
-        </div>
-        <div class="col"><button type="button" class="btn" @click=${setModels}>Set</button></div>
-      </div>
-      <dt-table .data=${data} .config=${config}></dt-table>`
-  },
+  render: renderCollectionUpdates,
 }
 
 const actionConfig = { ...defaultConfig }
@@ -202,4 +210,19 @@ export const Action = {
   args: {
     config: actionConfig,
   },
+}
+
+const searchPanesConfig = {
+  ...defaultConfig,
+  layout: {
+    top1: 'searchPanes',
+  },
+}
+
+export const SearchPanes = {
+  args: {
+    data: updatableCollection,
+    config: searchPanesConfig,
+  },
+  render: renderCollectionUpdates,
 }

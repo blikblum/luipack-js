@@ -86,7 +86,7 @@ export class DTCollectionAdapter extends DTDataAdapter {
 
 const dataAdapters = [DTCollectionAdapter]
 
-class DataTablesTable extends Component {
+export class DTTable extends Component {
   static properties = {
     data: { attribute: false },
   }
@@ -125,6 +125,16 @@ class DataTablesTable extends Component {
   firstUpdated() {
     const data = this.getTableData()
     const table = this.querySelector('table')
+
+    $(table).on('init.dt', (e) => {
+      const parent = this.parentElement
+      const filters = parent.querySelector('dt-table-filters')
+      if (filters) {
+        filters.api = e.dt
+        filters.initFilters()
+      }
+    })
+
     this._dataTable = new DataTable(table, { ...this.config, data })
     $(table).on('click', '[data-action]', (e) => {
       const data = this._dataTable.row(e.target.closest('tr')).data()
@@ -133,10 +143,6 @@ class DataTablesTable extends Component {
         this.dispatchEvent(new RowEvent(e.target.dataset.action, props))
       }
     })
-    const searchPanesContainer = this.querySelector('.dtsp-panesContainer')
-    if (searchPanesContainer) {
-      searchPanesContainer.classList.add('collapse')
-    }
   }
 
   updateData(changes) {
@@ -168,7 +174,7 @@ class DataTablesTable extends Component {
 
     const searchPanes = _dataTable.searchPanes
     if (searchPanes) {
-      searchPanes.rebuildPane()
+      searchPanes.rebuildPane(false, true)
     }
   }
 
@@ -181,6 +187,4 @@ class DataTablesTable extends Component {
   }
 }
 
-customElements.define('dt-table', DataTablesTable)
-
-export { DataTablesTable }
+customElements.define('dt-table', DTTable)
