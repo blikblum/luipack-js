@@ -6,6 +6,7 @@ import { Component, html } from './light-component.js'
 
 /**
  * @import {Model} from 'nextbone'
+ * @import {Api} from 'datatables.net'
  */
 
 class RowEvent extends Event {
@@ -93,15 +94,15 @@ export class DTTable extends Component {
   }
 
   /**
-   * @type {DataTable}
+   * @type {Api}
    */
-  _dataTable
+  api
+
+  config
 
   _dataAdapter
 
   _dataUnobserve
-
-  config
 
   disconnectedCallback() {
     super.disconnectedCallback()
@@ -135,9 +136,10 @@ export class DTTable extends Component {
       }
     })
 
-    this._dataTable = new DataTable(table, { ...this.config, data })
+    this.api = new DataTable(table, { ...this.config, data })
+
     $(table).on('click', '[data-action]', (e) => {
-      const data = this._dataTable.row(e.target.closest('tr')).data()
+      const data = this.api.row(e.target.closest('tr')).data()
       if (this._dataAdapter) {
         const props = this._dataAdapter.getRowEventProps(data)
         this.dispatchEvent(new RowEvent(e.target.dataset.action, props))
@@ -146,33 +148,33 @@ export class DTTable extends Component {
   }
 
   updateData(changes) {
-    const { _dataTable, _dataAdapter } = this
-    if (!_dataTable) {
+    const { api, _dataAdapter } = this
+    if (!api) {
       return
     }
     if (changes) {
       if (changes.added && changes.added.length) {
-        _dataTable.rows.add(changes.added)
+        api.rows.add(changes.added)
       }
       if (changes.changed) {
         changes.changed.forEach((data) => {
-          const row = _dataTable.row(`#${_dataAdapter.getRowId(data)}`)
+          const row = api.row(`#${_dataAdapter.getRowId(data)}`)
           row.data(data)
         })
       }
       if (changes.removed) {
         changes.removed.forEach((data) => {
-          _dataTable.row(`#${_dataAdapter.getRowId(data)}`).remove()
+          api.row(`#${_dataAdapter.getRowId(data)}`).remove()
         })
       }
     } else {
       const tableData = this.getTableData()
-      _dataTable.clear().rows.add(tableData)
+      api.clear().rows.add(tableData)
     }
 
-    _dataTable.draw()
+    api.draw()
 
-    const searchPanes = _dataTable.searchPanes
+    const searchPanes = api.searchPanes
     if (searchPanes) {
       searchPanes.rebuildPane(false, true)
     }
