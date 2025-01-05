@@ -70,6 +70,7 @@ export class DTCollectionAdapter extends DTDataAdapter {
       const cbArg = changes ? mapCollectionChanges(changes) : undefined
       cb(cbArg)
     }
+    cb()
     value.on('update reset', listener)
     return () => value.off('update reset', listener)
   }
@@ -116,9 +117,8 @@ export class DTTable extends Component {
         this._dataUnobserve = undefined
       }
       const Adapter = dataAdapters.find((adapter) => adapter.test(this.data)) || DTDataAdapter
-      const adapter = new Adapter(this.data)
+      const adapter = (this._dataAdapter = new Adapter(this.data))
       this._dataUnobserve = adapter.observe((changes) => this.updateData(changes))
-      this._dataAdapter = adapter
     }
   }
 

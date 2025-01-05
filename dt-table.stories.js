@@ -1,4 +1,8 @@
 import { Collection } from 'nextbone'
+
+import { addons } from '@storybook/preview-api'
+import { STORY_ARGS_UPDATED, UPDATE_STORY_ARGS } from '@storybook/core-events'
+
 import { html } from './light-component.js'
 
 import 'jquery'
@@ -54,6 +58,31 @@ const defaultData = [
     sector: 'Enfermaria B',
     registry: '2004',
     tags: ['tag c', 'tag x'],
+  },
+]
+
+const altData = [
+  {
+    id: 1,
+    name: 'Jim Jones',
+    bed: 1,
+    sector: 'Enfermaria B',
+    registry: '2000',
+  },
+  {
+    id: 2,
+    name: 'João Silva',
+    bed: 2,
+    sector: 'Enfermaria A',
+    registry: '2001',
+    tags: ['tag a', 'tag b'],
+  },
+  {
+    id: 99,
+    name: 'Strange Model',
+    bed: 2,
+    sector: 'Enfermaria A',
+    registry: '2001',
   },
 ]
 
@@ -143,30 +172,7 @@ function removeModel() {
 }
 
 function setModels() {
-  updatableCollection.set([
-    {
-      id: 1,
-      name: 'Jim Jones',
-      bed: 1,
-      sector: 'Enfermaria B',
-      registry: '2000',
-    },
-    {
-      id: 2,
-      name: 'João Silva',
-      bed: 2,
-      sector: 'Enfermaria A',
-      registry: '2001',
-      tags: ['tag a', 'tag b'],
-    },
-    {
-      id: 99,
-      name: 'Strange Model',
-      bed: 2,
-      sector: 'Enfermaria A',
-      registry: '2001',
-    },
-  ])
+  updatableCollection.set(altData)
 }
 
 function resetCollection() {
@@ -225,4 +231,53 @@ export const SearchPanes = {
     config: searchPanesConfig,
   },
   render: renderCollectionUpdates,
+}
+
+function setDataNoRender(storyId, data) {
+  const storyStoreArgs = global.__STORYBOOK_STORY_STORE__.args
+  storyStoreArgs.update(storyId, {
+    data,
+  })
+  addons.getChannel().emit(STORY_ARGS_UPDATED, {
+    storyId,
+    args: storyStoreArgs.get(storyId),
+  })
+}
+
+function setData(storyId, data) {
+  addons.getChannel().emit(UPDATE_STORY_ARGS, {
+    storyId,
+    updatedArgs: { data },
+  })
+}
+
+const altCollection = new Collection(altData)
+
+function renderSwapData({ data, config }, { id }) {
+  return html`<div class="row">
+      <div class="col">
+        <button type="button" class="btn" @click=${() => setData(id, defaultCollection)}>
+          Collection1
+        </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn" @click=${() => setData(id, altCollection)}>
+          Collection2
+        </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn" @click=${() => setData(id, defaultData)}>Data1</button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn" @click=${() => setData(id, altData)}>Data2</button>
+      </div>
+    </div>
+    <dt-table .data=${data} .config=${config}></dt-table>`
+}
+
+export const SwapData = {
+  args: {
+    data: updatableCollection,
+  },
+  render: renderSwapData,
 }
