@@ -1,6 +1,6 @@
 {
   "name": "luipack",
-  "version": "0.6.7",
+  "version": "0.7.0",
   "description": "Arbitrary collection of components, templates and utils",
   "main": "index.js",
   "repository": "https://github.com/blikblum/luipack-js.git",
@@ -18,7 +18,10 @@
   "files": [
     "bs-components",
     "data",
-    "light-component.js"
+    "light-component.js",
+    "dt-table.js",
+    "dt-table.scss",
+    "dt-table-filters.js"
   ],
   "devDependencies": {
     "@popperjs/core": "^2.11.7",
@@ -52,6 +55,8 @@
   },
   "packageManager": "yarn@3.1.1",
   "peerDependencies": {
+    "datatables.net": "*",
+    "datatables.net-bs5": "*",
     "lit": "*",
     "lodash-es": "*",
     "nextbone": "*",
