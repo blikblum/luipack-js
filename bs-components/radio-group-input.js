@@ -60,6 +60,7 @@ export default class RadioGroupInput extends Component {
       input: this.styled ? 'form-check-input' : 'custom-control-input',
       label: this.styled ? 'form-check-label' : 'custom-control-label',
     }
+    const isInline = this.inline ? 'form-check-inline' : ''
 
     return html`
       ${items.map((item, i) => {
@@ -67,7 +68,7 @@ export default class RadioGroupInput extends Component {
         const label = item.name || item.title
         const id = `${this.name}-${i}`
         return html`
-          <div class="${this.inline ? 'form-check-inline' : ''} ${styles.wrapper}">
+          <div class="${isInline} ${styles.wrapper}">
             <input
               id=${id}
               type="radio"
@@ -84,7 +85,7 @@ export default class RadioGroupInput extends Component {
         `
       })}
       ${this.withOther
-        ? html`<div class="${this.inline ? 'form-check-inline' : ''} ${styles.wrapper}">
+        ? html`<div class="${isInline} ${styles.wrapper}">
               <input
                 id="other-radio-input"
                 type="radio"
@@ -96,7 +97,7 @@ export default class RadioGroupInput extends Component {
               />
               <label class="${styles.label}" for="other-radio-input">Outro</label>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 ${isInline}">
               <input
                 id="other-input"
                 type="text"
