@@ -6,6 +6,9 @@ export default class RadioGroupInput extends Component {
     name: { type: String },
     withOther: { type: Boolean, attribute: 'with-other' },
     items: { type: Array, attribute: false },
+    disabled: { type: Boolean },
+    styled: { type: Boolean },
+    inline: { type: Boolean },
   }
 
   updateValue(value) {
@@ -52,45 +55,55 @@ export default class RadioGroupInput extends Component {
 
   render() {
     const items = this.items || []
+    const styles = {
+      wrapper: this.styled ? 'form-check' : 'custom-control custom-radio',
+      input: this.styled ? 'form-check-input' : 'custom-control-input',
+      label: this.styled ? 'form-check-label' : 'custom-control-label',
+    }
+    const isInline = this.inline ? 'form-check-inline' : ''
 
     return html`
       ${items.map((item, i) => {
         const radioValue = item.value || item.title
+        const label = item.name || item.title
+        const id = `${this.name}-${i}`
         return html`
-          <div class="custom-control custom-radio">
+          <div class="${isInline} ${styles.wrapper}">
             <input
-              id=${this.name + i}
+              id=${id}
               type="radio"
               name=${this.name}
-              class="custom-control-input"
+              class="${styles.input}"
               data-index=${i}
               @change=${this.itemRadioInputChange}
               .value=${radioValue}
               .checked=${this.value === radioValue}
+              ?disabled=${this.disabled}
             />
-            <label class="custom-control-label" for=${this.name + i}>${item.title}</label>
+            <label class="${styles.label}" for=${id}>${label}</label>
           </div>
         `
       })}
       ${this.withOther
-        ? html`<div class="custom-control custom-radio">
+        ? html`<div class="${isInline} ${styles.wrapper}">
               <input
                 id="other-radio-input"
                 type="radio"
                 name=${this.name}
-                class="custom-control-input"
+                class="${styles.input}"
                 .checked=${this.otherSelected}
                 @change=${this.otherRadioInputChange}
+                ?disabled=${this.disabled}
               />
-              <label class="custom-control-label" for="other-radio-input">Outro</label>
+              <label class="${styles.label}" for="other-radio-input">Outro</label>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 ${isInline}">
               <input
                 id="other-input"
                 type="text"
                 name=${this.name}
                 class="form-control"
-                ?disabled=${!this.otherSelected}
+                ?disabled=${!this.otherSelected || this.disabled}
                 .value=${this.otherValue || null}
                 @input=${this.otherInputChange}
               />
