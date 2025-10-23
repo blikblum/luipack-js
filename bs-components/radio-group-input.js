@@ -65,10 +65,11 @@ export default class RadioGroupInput extends Component {
       ${items.map((item, i) => {
         const radioValue = item.value || item.title
         const label = item.name || item.title
+        const id = `${this.name}-${i}`
         return html`
           <div class="${this.inline ? 'form-check-inline' : ''} ${styles.wrapper}">
             <input
-              id=${this.name + i}
+              id=${id}
               type="radio"
               name=${this.name}
               class="${styles.input}"
@@ -78,7 +79,7 @@ export default class RadioGroupInput extends Component {
               .checked=${this.value === radioValue}
               ?disabled=${this.disabled}
             />
-            <label class="${styles.label}" for=${this.name + i}>${label}</label>
+            <label class="${styles.label}" for=${id}>${label}</label>
           </div>
         `
       })}
